@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PruebaSeedCode2</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/PruebaSeedCode2.styles.css" asp-append-version="true" />
+
+    <!-- Fuente bonita y personalizada -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #ffffff !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            color: #444 !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: #555 !important;
+            font-weight: 500;
+        }
+
+            .navbar-nav .nav-link:hover {
+                color: #000 !important;
+            }
+
+        .container main {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        footer {
+            background-color: #ffffff;
+            padding: 20px 0;
+            font-size: 14px;
+            color: #888;
+            text-align: center;
+            border-top: 1px solid #dee2e6;
+        }
+
+            footer a {
+                color: #007bff;
+                text-decoration: none;
+            }
+
+                footer a:hover {
+                    text-decoration: underline;
+                }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+            .user-info span {
+                font-weight: 500;
+                color: #444;
+            }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light border-bottom">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PruebaSeedCode2</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                    <ul class="navbar-nav">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Roles" asp-action="Index">Roles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Users" asp-action="Index">Usuarios</a>
+                            </li>
+                        }
+                    </ul>
+
+                    <div class="user-info">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            var nombre = User.FindFirst("Nombre")?.Value;
+                            <span>@nombre</span>
+                            <a class="nav-link" asp-controller="Users" asp-action="CerrarSession">Cerrar sesión</a>
+                        }
+                        else
+                        {
+                            <a class="nav-link" asp-controller="Users" asp-action="Login">Iniciar sesión</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer>
+        &copy; 2025 - PruebaSeedCode2 - <a asp-controller="Home" asp-action="Privacy">Política de privacidad</a>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

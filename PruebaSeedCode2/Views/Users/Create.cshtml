@@ -1,0 +1,119 @@
+﻿@model PruebaSeedCode2.Models.User
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<style>
+    body {
+        background-color: #f4f4f4;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .create-container {
+        max-width: 600px;
+        margin: 40px auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h4 {
+        text-align: center;
+        color: #444;
+    }
+
+    .form-group label {
+        font-weight: 600;
+        color: #555;
+    }
+
+    .form-control {
+        border-radius: 10px;
+    }
+
+    .btn-primary {
+        background-color: #6c757d;
+        border: none;
+        padding: 10px;
+        border-radius: 10px;
+        width: 100%;
+    }
+
+        .btn-primary:hover {
+            background-color: #5a6268;
+        }
+
+    .back-link {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+        .back-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+            .back-link a:hover {
+                text-decoration: underline;
+            }
+</style>
+
+<div class="create-container">
+    <h1>Crear usuario</h1>
+    <h4>Formulario de registro</h4>
+    <hr />
+
+    <form asp-action="Create" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Password" class="control-label"></label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="ConfirmarPassword" class="control-label"></label>
+            <input asp-for="ConfirmarPassword" class="form-control" />
+            <span asp-validation-for="ConfirmarPassword" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="RoleId" class="control-label"></label>
+            <select asp-for="RoleId" class="form-control" asp-items="ViewBag.RoleId"></select>
+            <span asp-validation-for="RoleId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-4">
+            <label class="form-label">Foto de perfil</label>
+            <input type="file" name="image" class="form-control" />
+            <span asp-validation-for="UserImage" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Crear usuario" class="btn btn-primary" />
+        </div>
+    </form>
+
+    <div class="back-link">
+        <a asp-action="Index">← Volver a la lista</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

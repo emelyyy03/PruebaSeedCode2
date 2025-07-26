@@ -1,0 +1,96 @@
+﻿@model IEnumerable<PruebaSeedCode2.Models.Role>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .roles-container {
+        max-width: 900px;
+        margin: 40px auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 30px;
+    }
+
+    .btn-create {
+        display: inline-block;
+        margin-bottom: 20px;
+        background-color: #6c757d;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        text-decoration: none;
+    }
+
+        .btn-create:hover {
+            background-color: #5a6268;
+        }
+
+    table {
+        width: 100%;
+    }
+
+    th {
+        background-color: #f1f1f1;
+        color: #444;
+        font-weight: 600;
+        padding: 10px;
+        text-align: left;
+    }
+
+    td {
+        padding: 10px;
+        vertical-align: middle;
+    }
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+        margin-right: 8px;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+</style>
+
+<div class="roles-container">
+    <h1>Lista de Roles</h1>
+
+    <p>
+        <a asp-action="Create" class="btn-create">+ Crear nuevo rol</a>
+    </p>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Name)
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">✏️ Editar</a>
+                        <a asp-action="Details" asp-route-id="@item.Id">🔍 Detalles</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id">🗑️ Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

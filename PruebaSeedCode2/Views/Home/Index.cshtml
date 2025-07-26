@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    .home-container {
+        max-width: 800px;
+        margin: 80px auto;
+        padding: 40px;
+        background-color: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+        .home-container h1 {
+            font-size: 2.8rem;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .home-container p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .home-container a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background-color: #6c757d;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+            .home-container a:hover {
+                background-color: #5a6268;
+            }
+</style>
+
+<div class="home-container">
+    <h1>Gestión de Roles y Usuarios</h1>
+    <p>Bienvenida al sitio de <strong>Johana</strong> 🧑‍💻</p>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a asp-controller="Users" asp-action="Index" class="btn-custom">Ir a Usuarios</a>
+    }
+    else
+    {
+        <button class="btn-custom" onclick="showLoginWarning()">Ir a Usuarios</button>
+    }
+</div>
+
+<script>
+    function showLoginWarning() {
+        alert("⚠️ Debes iniciar sesión para acceder a la sección de Usuarios.");
+    }
+</script>
+

@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Acceso denegado";
+}
+
+<div style="max-width: 600px; margin: 80px auto; text-align:center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    <h1 style="color:#dc3545;">Acceso denegado</h1>
+    <p style="font-size:1.2rem; color:#555;">
+        @TempData["Warning"] ?? "No tienes permiso para acceder a esta sección."
+    </p>
+    <a asp-controller="Home" asp-action="Index" style="color:#007bff; font-weight:600; text-decoration:none;">
+        ← Volver a la página principal
+    </a>
+</div>

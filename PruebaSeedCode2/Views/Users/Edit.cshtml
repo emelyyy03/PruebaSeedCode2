@@ -1,0 +1,133 @@
+﻿@model PruebaSeedCode2.Models.User
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<style>
+    body {
+        background-color: #f4f4f4;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .edit-container {
+        max-width: 600px;
+        margin: 40px auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h4 {
+        text-align: center;
+        color: #444;
+    }
+
+    .form-group label {
+        font-weight: 600;
+        color: #555;
+    }
+
+    .form-control {
+        border-radius: 10px;
+    }
+
+    .btn-primary {
+        background-color: #6c757d;
+        border: none;
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+        .btn-primary:hover {
+            background-color: #5a6268;
+        }
+
+    .back-link {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+        .back-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+            .back-link a:hover {
+                text-decoration: underline;
+            }
+
+    .current-img {
+        display: block;
+        margin: 10px 0;
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<div class="edit-container">
+    <h1>Editar usuario</h1>
+    <h4>Detalles del usuario</h4>
+    <hr />
+
+    <form asp-action="Edit" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group mb-3">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="RoleId" class="control-label"></label>
+            <select asp-for="RoleId" class="form-control" asp-items="ViewBag.RoleId"></select>
+            <span asp-validation-for="RoleId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label>Imagen actual</label><br />
+            @if (Model.UserImage != null)
+            {
+                var base64 = Convert.ToBase64String(Model.UserImage);
+                var imgSrc = $"data:image/png;base64,{base64}";
+                <img src="@imgSrc" class="current-img" />
+            }
+            else
+            {
+                <span class="text-muted">Sin imagen</span>
+            }
+        </div>
+
+        <div class="form-group mb-4">
+            <label>Nueva imagen (opcional)</label>
+            <input type="file" name="Image" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Guardar cambios" class="btn btn-primary" />
+        </div>
+    </form>
+
+    <div class="back-link">
+        <a asp-action="Index">← Volver a la lista</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
